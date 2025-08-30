@@ -1,28 +1,33 @@
+/* Global styles for the entire page. */
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f4f8; 
+    background-color: #f0f4f8; /* A nice, soft gray background. */
     color: #333;
 }
 
+/* Base styles for our main layout using CSS Grid. */
 .page-container {
     display: grid;
+    /* This defines the names of our grid areas for easy placement. */
     grid-template-areas:
         "header header"
         "navbar navbar"
         "main sidebar"
         "footer footer";
+    /* Defines the column widths. The main content will take up more space. */
     grid-template-columns: 2fr 1fr;
-    gap: 20px; 
+    gap: 20px; /* Space between grid items. */
     padding: 20px;
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: 0 auto; /* This centers our page container on the screen. */
 }
 
+/* Assigning each element to its named grid area. */
 .page-header {
     grid-area: header;
-    background-color: #4a90e2; 
+    background-color: #4a90e2; /* A blue header. */
     color: white;
     padding: 20px;
     text-align: center;
@@ -31,11 +36,12 @@ body {
 
 .navbar {
     grid-area: navbar;
-    background-color: #6a6a6a; 
+    background-color: #6a6a6a; /* A dark gray nav bar. */
     border-radius: 8px;
 
+    /* Here's our first Flexbox! We use it to align the navigation links. */
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around; /* Distributes space evenly between links. */
     align-items: center;
     padding: 10px;
 }
@@ -50,7 +56,7 @@ body {
 }
 
 .navbar a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2); /* A semi-transparent white on hover. */
 }
 
 .main-content {
@@ -76,36 +82,46 @@ body {
     border-radius: 8px;
 }
 
+/* Our second use of Flexbox for the card layout. */
 .card-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px; 
+    flex-wrap: wrap; /* Allows cards to wrap to a new line on smaller screens. */
+    gap: 20px; /* Space between the cards. */
     margin-top: 20px;
 }
 
 .card {
-    background-color: #e3f2fd; 
+    background-color: #e3f2fd; /* A light blue color for the cards. */
     padding: 20px;
     border-radius: 8px;
-    flex: 1 1 300px; 
+    flex: 1 1 300px; /* This is a Flexbox shorthand property. It means:
+                       flex-grow: 1 (can grow to fill space)
+                       flex-shrink: 1 (can shrink if needed)
+                       flex-basis: 300px (ideal width is 300px)
+                       The cards will try to be 300px wide, and if there isn't enough space, they'll shrink or wrap. */
 }
 
+/* MEDIA QUERIES - This is the key to making our layout responsive. */
 
+/* For screens smaller than 768px (like tablets). */
 @media (max-width: 768px) {
     .page-container {
+        /* We change the grid layout so the sidebar moves below the main content. */
         grid-template-areas:
             "header"
             "navbar"
             "main"
             "sidebar"
             "footer";
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr; /* The single column now takes up all available space. */
         gap: 15px;
     }
 }
 
+/* For screens smaller than 480px (like mobile phones). */
 @media (max-width: 480px) {
     .navbar {
+        /* We change the Flexbox direction to a column so the links stack on top of each other. */
         flex-direction: column;
     }
 }
